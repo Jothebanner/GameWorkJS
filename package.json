@@ -1,0 +1,26 @@
+{
+  "name": "jothebanner-op",
+  "version": "1.0.0",
+  "private": true,
+  "description": "jothebanner-op",
+  "author": "Jothebanner",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.18.9",
+    "core-js": "^3.25.0",
+    "cross-env": "^7.0.3",
+    "gatsby": "^4.21.1",
+    "gh-pages": "^4.0.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}
