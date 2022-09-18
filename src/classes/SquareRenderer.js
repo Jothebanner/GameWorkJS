@@ -1,24 +1,26 @@
-class SquareRenderer {
-    constructor(x, y, color) {
-        this.context = null;
-        this.parent = null;
-        this.x = x;
-        this.y = y;
+import RenderableComponentBase from "./RenderableComponentBase.js";
+
+class SquareRenderer extends RenderableComponentBase {
+    constructor(xPos, yPos, color, xSize = 1, ySize = 1) {
+        super();
+        this.xPos = xPos;
+        this.yPos = yPos;
         this.color = color;
+        this.xSize = xSize;
+        this.ySize = ySize;
     }
 
-    setParent(parent, context) {
-        this.context = context;
-        this.parent = parent;
+    start() {
+        this.setListeners();
     }
 
     frameUpdate() {
-        this.draw(this.context, this.x, this.y);
+        this.draw(this.context, this.xPos, this.yPos);
     }
 
     draw(context, x, y) {
         context.fillStyle = "white";
-        context.fillRect(x, y, 1, 1);
+        context.fillRect(x * this.xScale, y * this.xScale, 1 * this.xScale, 1 * this.yScale);
     }
 }
 
