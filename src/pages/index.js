@@ -36,12 +36,12 @@ const IndexPage = () => {
         let newGO = new GameObject(50, 50);
         gameManager.addGameObject(newGO);
 
-        let stars = 201;
+        let stars = 500;
         for (let i = 0; i < stars; i++)
         {
-            let x = Math.random() * gameCanvasRef.current.offsetWidth;
+            let x = Math.random() * 1920;
             
-            let y = Math.random() * gameCanvasRef.current.offsetHeight;
+            let y = Math.random() * 1080;
 
             let star = new SquareRenderer(x, y, "white");
 
