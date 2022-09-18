@@ -37,16 +37,14 @@ class GameObject {
 
     addComponent(component) {
         this.components.push(component);
-        //component.setContext(this.gameContext);
-        //component.setGameObject(this);
-        component.setParent(this, this.gameContext);
+        component.setContext(this.gameContext);
+        component.setGameObject(this);
 
         try {
             this.callComponentStartFuction(component);
         } catch (error) {
             console.log(error);
         }
-        console.log(this.components);
     }
 
     initialize() {
