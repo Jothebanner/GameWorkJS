@@ -8,19 +8,28 @@ class SquareRenderer extends RenderableComponentBase {
         this.color = color;
         this.xSize = xSize;
         this.ySize = ySize;
-    }
-
-    start() {
-        this.setListeners();
+        this.lastError = null;
+        this.errorCount = 0;
     }
 
     frameUpdate() {
-        this.draw(this.context, this.xPos, this.yPos);
+        this.draw(this.context, this.xPos + this.gameObject.xPos, this.yPos + this.gameObject.yPos);
     }
 
     draw(context, x, y) {
-        context.fillStyle = "white";
-        context.fillRect(x * this.xScale, y * this.xScale, 1 * this.xScale, 1 * this.yScale);
+        try {
+            context.fillStyle = "white";
+            context.fillRect(x * this.xScale, y * this.xScale, this.xSize * this.xScale, this.ySize * this.yScale);
+        } catch (error) {
+            if (error === this.lastError)
+            {
+                this.lastError = error;
+                this.errorCount++;
+                console.log(error + this.errorCount);
+            }
+            else
+                this.errorCount = 0;
+        }
     }
 }
 

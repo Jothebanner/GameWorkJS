@@ -10,11 +10,15 @@ class RenderableComponentBase extends GameComponentBase {
         this.yScale = 1;
 
         // any renderable object should have a position or at least a "starting position" in the case of a linerenderer
+        // this should be set when the component is being created, but I think it needs to default to something if not
         this.xPos = 0;
         this.yPos = 0;
 
         // if it's renderable then it needs a canvas to render from
         this.context = null;
+        
+        this.startFunctions.push(this.setContext);
+        this.startFunctions.push(this.setListeners);
     }
 
     setXScale(eventResponse) {
@@ -26,13 +30,13 @@ class RenderableComponentBase extends GameComponentBase {
         this.yScale = eventResponse.detail;
     }
 
-    setContext(context)
+    setContext = () =>
     {
-        this.context = context;
+        this.context = this.gameObject.context;
     }
     
-    // the GameObject should call this bad boi when the component is added
-    setListeners()
+    //  this bad boi is called when the component is added
+    setListeners = () =>
     {
         this.gameObject.onXScale.addEventListener('updateXScale', this.setXScale.bind(this));
         this.gameObject.onYScale.addEventListener('updateYScale', this.setYScale); 
