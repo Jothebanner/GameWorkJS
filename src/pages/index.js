@@ -4,6 +4,7 @@ import GameManager from "../classes/GameManager";
 import GameObject from "../classes/GameObject";
 import Sprite from "../classes/Sprite.js"
 import SquareRenderer from "../classes/SquareRenderer"
+import ShipMovement from "../gameScripts/ShipMovement.js";
 const icon = require("../images/icon.png").default;
 
 const pageStyles = {
@@ -19,12 +20,12 @@ const starBackgroundStyle = {
 
 const IndexPage = () => {
     const gameCanvasRef = React.useRef();
-    let [gameManager, setGameManager] = React.useState(new GameManager());
+    let [gameManager, setGameManager] = React.useState(new GameObject());
 
     React.useEffect(() => {
         if (gameManager == null)
         {
-            setGameManager(new GameManager());
+            setGameManager(new GameObject());
         }
     }, []);
 
@@ -33,8 +34,8 @@ const IndexPage = () => {
     });
 
     React.useEffect(() => {
-        let newGO = new GameObject(50, 50);
-        gameManager.addGameObject(newGO);
+        let newGO = new GameObject(0, 0);
+        gameManager.addChild(newGO);
 
         let stars = 500;
         for (let i = 0; i < stars; i++)
@@ -43,10 +44,16 @@ const IndexPage = () => {
             
             let y = Math.random() * 1080;
 
-            let star = new SquareRenderer(x, y, "white");
+            let star = new SquareRenderer(x, y, "white", 1, 1);
 
-            newGO.addComponent(star);
+            newGO.addChild(star);
         }
+
+        console.log(newGO.components);
+
+        let shipMovement = new ShipMovement();
+
+        newGO.addChild(shipMovement);
 
         //let newImage = icon;
         //let newSprite = new Sprite(50, 50, newImage, 50, 50);
