@@ -22,6 +22,8 @@ class GameComponentBase {
         this.setGameObject(gameObject);
 
         // Add any function to startFunctions array. It has access to the gameObject
+        // every function should have access to this anyway :T
+        // I don't know what the correct thing to do is
         this.startFunctions.forEach((func) => {func(gameObject)});
     }
 }
