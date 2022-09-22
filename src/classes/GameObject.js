@@ -21,10 +21,13 @@ class GameObject extends GameComponentBase {
 
     //TODO: fix this mess
     setGameContext = (context) => {
+        // if this was called by the initializeGameComponent function in the GameComponentBase class then it should equal the parent GameObject
         if (context === this.gameObject)
         {
             this.context = this.gameObject.context;
         }
+        // if it equals a context then it was set by the user to connect it to the canvas
+        // this should be the case for the "GameManager" GameObject
         else
             this.context = context;
     }
@@ -65,6 +68,8 @@ class GameObject extends GameComponentBase {
             console.log(error);
         }
 
+
+        // move this to like a start function or something. Somewhere after all of the children have been added
         try {
             this.callComponentStartFuction(component);
         } catch (error) {
@@ -109,6 +114,20 @@ class GameObject extends GameComponentBase {
         if (typeof (component.physicsUpdate) == "function") {
             try {
                 component.physicsUpdate();
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+    lateUpdate() {
+        this.components.forEach(this.callComponentLateUpdateFuction);
+    }
+
+    callComponentLateUpdateFuction(component) {
+        if (typeof (component.lateUpdate) == "function") {
+            try {
+                component.lateUpdate();
             } catch (error) {
                 console.log(error);
             }
