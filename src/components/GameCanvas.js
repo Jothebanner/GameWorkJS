@@ -7,29 +7,36 @@ const canvasStyle = {
 
 const GameCanvas = React.forwardRef((props, ref) => {
     let [scaleMod, setScaleMod] = React.useState();
-    let [onXScale, setOnXScale] = React.useState(new EventTarget());
-    let [onYScale, setOnYScale] = React.useState(new EventTarget());
+    let [onXScale] = React.useState(new EventTarget());
+    let [onYScale] = React.useState(new EventTarget());
 
     // These don't work, gotta useState
     //const onXScale = new EventTarget();
     //const onYScale = new EventTarget();
 
     React.useEffect(() => {
+        window.addEventListener("resize", sizeWindow);
         props.GameManager.setListeners(onXScale, onYScale)
+
+        // only want these bois to run once
+        requestAnimationFrame(animationLoopRecursion);
+        setInterval(() => {
+            props.GameManager.physicsUpdate()
+        }, 20);
     }, []);
 
     function animationLoopRecursion()
     {
+        if (!props.clear)
+            ref.current.getContext("2d").clearRect(0, 0, ref.current.width, ref.current.height);
+            
         props.GameManager.frameUpdate();
         requestAnimationFrame(animationLoopRecursion);
+
+        // call lateUpdate after the frameUpdate so that it's late lol
+        // I straight-up stole this from unity
+        props.GameManager.lateUpdate();
     }
-    requestAnimationFrame(animationLoopRecursion);
-
-    setInterval(() => {
-        props.GameManager.physicsUpdate()
-    }, 20);
-
-    window.onresize = sizeWindow;
     
     // this is the secret sauce. It make everything scale on load. 10/10 DON'T EVER CHANGE THIS!!!
     React.useEffect(() => {
