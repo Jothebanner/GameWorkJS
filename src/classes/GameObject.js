@@ -4,7 +4,6 @@ class GameObject extends GameComponentBase {
 
     constructor(xPos, yPos) {
         super();
-        this.gameManager = null;
         this.context = null;
         this.xPos = xPos;
         this.yPos = yPos;
@@ -19,21 +18,17 @@ class GameObject extends GameComponentBase {
         this.startFunctions.push(this.setListeners);
     }
 
-    //TODO: fix this mess
-    setGameContext = (context) => {
+    // shhhhhhhhh naming conventions fix everything, right?
+    setGameContext = (contextSource) => {
         // if this was called by the initializeGameComponent function in the GameComponentBase class then it should equal the parent GameObject
-        if (context === this.gameObject)
+        if (contextSource === this.parentObject)
         {
-            this.context = this.gameObject.context;
+            this.context = this.parentObject.context;
         }
         // if it equals a context then it was set by the user to connect it to the canvas
         // this should be the case for the "GameManager" GameObject
         else
-            this.context = context;
-    }
-
-    setGameManager(gameManager) {
-        this.gameManager = gameManager;
+            this.context = contextSource;
     }
 
     setXScale(scale) {
@@ -46,14 +41,14 @@ class GameObject extends GameComponentBase {
         this.onYScale.dispatchEvent(new CustomEvent('updateYScale', { 'detail': this.yScale }));
     }
 
-    setListeners = (xScaleET, yScaleET) => {
-        if (xScaleET === undefined || yScaleET === undefined) {
-            this.gameObject.onXScale.addEventListener('updateXScale', this.setXScale.bind(this));
-            this.gameObject.onYScale.addEventListener('updateYScale', this.setYScale.bind(this));
+    setListeners = (xScaleEventTarget, yScaleEventTarget) => {
+        if (xScaleEventTarget === undefined || yScaleEventTarget === undefined) {
+            this.parentObject.onXScale.addEventListener('updateXScale', this.setXScale.bind(this));
+            this.parentObject.onYScale.addEventListener('updateYScale', this.setYScale.bind(this));
         }
         else {
-            xScaleET.addEventListener('updateXScale', this.setXScale.bind(this));
-            yScaleET.addEventListener('updateYScale', this.setYScale.bind(this));
+            xScaleEventTarget.addEventListener('updateXScale', this.setXScale.bind(this));
+            yScaleEventTarget.addEventListener('updateYScale', this.setYScale.bind(this));
         }
     }
 
