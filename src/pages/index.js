@@ -1,11 +1,8 @@
 import * as React from "react"
 import GameCanvas from "../components/GameCanvas.js";
-import GameManager from "../classes/GameManager";
 import GameObject from "../classes/GameObject";
-import Sprite from "../classes/Sprite.js"
 import SquareRenderer from "../classes/SquareRenderer"
 import ShipMovement from "../gameScripts/ShipMovement.js";
-const icon = require("../images/icon.png").default;
 
 const pageStyles = {
   color: "#232129",
@@ -14,55 +11,57 @@ const pageStyles = {
   backgroundColor: "Gray"
 }
 
-const starBackgroundStyle = {
+const BackgroundStyle = {
     backgroundColor: "#111",
+    zIndex: 0,
+    position: "absolute",
+}
+
+const shipStyle = {
+    zIndex: 2,
+    position: "absolute",
 }
 
 const IndexPage = () => {
-    const gameCanvasRef = React.useRef();
-    let [gameManager, setGameManager] = React.useState(new GameObject());
+    let [resolution] = React.useState({"width":1920, "height": 1080})
+    // parent GameObject for each GameCanvas
+    const backgroundGameCanvasRef = React.useRef();
+    const shipGameCanvasRef = React.useRef();
+    // set up the GameObjects that will be manually tied to the GameCanvas react components
+    let [backgroundManager] = React.useState(new GameObject(0,0));
+    let [shipManager] = React.useState(new GameObject(resolution.width/2, resolution.height/2));
 
     React.useEffect(() => {
-        if (gameManager == null)
-        {
-            setGameManager(new GameObject());
-        }
+        backgroundManager.setGameContext(backgroundGameCanvasRef.current.getContext("2d"));
+        shipManager.setGameContext(shipGameCanvasRef.current.getContext("2d"));
     }, []);
 
     React.useEffect(() => {
-        gameManager.setGameContext(gameCanvasRef.current.getContext("2d"));
-    });
-
-    React.useEffect(() => {
-        let newGO = new GameObject(0, 0);
-        gameManager.addChild(newGO);
+        let background = new SquareRenderer(0,0, "black", resolution.width, resolution.height);
+        backgroundManager.addChild(background);
 
         let stars = 500;
         for (let i = 0; i < stars; i++)
         {
-            let x = Math.random() * 1920;
+            let x = Math.random() * resolution.width;
             
-            let y = Math.random() * 1080;
+            let y = Math.random() * resolution.height;
 
-            let star = new SquareRenderer(x, y, "white", 1, 1);
+            let star = new SquareRenderer(x, y, "white", 2, 2);
 
-            newGO.addChild(star);
+            backgroundManager.addChild(star);
         }
 
-        console.log(newGO.components);
-
         let shipMovement = new ShipMovement();
-
-        newGO.addChild(shipMovement);
-
-        //let newImage = icon;
-        //let newSprite = new Sprite(50, 50, newImage, 50, 50);
-        //newGO.addComponent(newSprite);
+        shipManager.addChild(shipMovement);
+        let ship2 = new SquareRenderer(0,0, "red", 20, 20);
+        shipManager.addChild(ship2);
     }, []);
 
   return (
     <main style={pageStyles}>
-        <GameCanvas style={starBackgroundStyle} GameManager={gameManager} resolution={[1920,1080]} ref={gameCanvasRef}></GameCanvas>
+        <GameCanvas style={BackgroundStyle} GameManager={backgroundManager} resolution={[resolution.width,resolution.height]} ref={backgroundGameCanvasRef}></GameCanvas>
+        <GameCanvas style={shipStyle} GameManager={shipManager} resolution={[resolution.width,resolution.height]} ref={shipGameCanvasRef}></GameCanvas>
     </main>
   )
 }
