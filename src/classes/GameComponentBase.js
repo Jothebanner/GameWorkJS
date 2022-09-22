@@ -2,10 +2,10 @@ class GameComponentBase {
 
     constructor()
     {
-        // any component needs to belong to a GameObject
-        this.gameObject = null;
+        // any component needs to belong to a GameObject except the gamemanager??
+        this.parentObject = null;
 
-        this.startFunctions = new Array();
+        this.startFunctions = [];
     }
 
     // brain is very slow
@@ -14,7 +14,7 @@ class GameComponentBase {
     
     setGameObject = (gameObject) =>
     {
-        this.gameObject = gameObject;
+        this.parentObject = gameObject;
     }
 
     initializeGameComponent(gameObject)

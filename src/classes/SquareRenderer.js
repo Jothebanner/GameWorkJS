@@ -13,12 +13,12 @@ class SquareRenderer extends RenderableComponentBase {
     }
 
     frameUpdate() {
-        this.draw(this.context, this.xPos + this.gameObject.xPos, this.yPos + this.gameObject.yPos);
+        this.draw(this.context, this.xPos + this.parentObject.xPos, this.yPos + this.parentObject.yPos);
     }
 
     draw(context, x, y) {
         try {
-            context.fillStyle = "white";
+            context.fillStyle = this.color;
             context.fillRect(x * this.xScale, y * this.xScale, this.xSize * this.xScale, this.ySize * this.yScale);
         } catch (error) {
             if (error === this.lastError)

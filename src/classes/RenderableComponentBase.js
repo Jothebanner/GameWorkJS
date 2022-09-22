@@ -32,21 +32,21 @@ class RenderableComponentBase extends GameComponentBase {
 
     setContext = () =>
     {
-        this.context = this.gameObject.context;
+        this.context = this.parentObject.context;
     }
     
     //  this bad boi is called when the component is added
     setListeners = () =>
     {
-        this.gameObject.onXScale.addEventListener('updateXScale', this.setXScale.bind(this));
-        this.gameObject.onYScale.addEventListener('updateYScale', this.setYScale); 
+        this.parentObject.onXScale.addEventListener('updateXScale', this.setXScale.bind(this));
+        this.parentObject.onYScale.addEventListener('updateYScale', this.setYScale); 
     }
 
     // for when the component is removed
     disconnectListeners()
     {
-        this.gameObject.onXScale.removeEventListener('updateXScale', this.setXScale);
-        this.gameObject.onYScale.removeEventListener('updateYScale', this.setYScale.bind(this));
+        this.parentObject.onXScale.removeEventListener('updateXScale', this.setXScale);
+        this.parentObject.onYScale.removeEventListener('updateYScale', this.setYScale.bind(this));
     }
 }
 
