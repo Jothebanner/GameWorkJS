@@ -23,6 +23,11 @@ class Vector3 {
         return new Vector3(vector3.x / total, vector3.y / total, vector3.z/total);
     }
 
+    static zero()
+    {
+        return new Vector3(0,0,0);
+    }
+
     //TODO: DOT product
 }
 
