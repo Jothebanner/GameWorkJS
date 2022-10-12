@@ -7,11 +7,13 @@
 class InputSingleton {
     constructor() {
         if (InputSingleton.instance)
-            return console.log("You're NOT suppose to make new singletons ya goof. To use the InputSingleton class use InputSingleton.getInstance; it handles all that nonsense.");
+            return console.log("You're not supposed to make new singletons ya goof. To use the InputSingleton class use InputSingleton.getInstance; it handles all that nonsense.");
 
         this.keysDownThisFrame = [];
         this.keysUpThisFrame = [];
         this.heldKeys = [];
+
+        // listen for up and down events
         window.addEventListener("keydown", this.processDownEvent);
         window.addEventListener("keyup", this.processUpEvent);
         // there's no way this is gonna compile // it did???
@@ -19,7 +21,7 @@ class InputSingleton {
         // how does javascript work??
     }
 
-    // Community S1 Ep17
+    // Community S1 Ep17 // most of this episode is cringy, tho it has it's parts
 
     /**
      * Clears the keyDownThisFrame and keyUpThisFrame. Probably call this at the end of frame processing like late-update.
@@ -29,11 +31,11 @@ class InputSingleton {
         this.keysUpThisFrame = [];
     }
 
-    addKeyDownToArray = (key) => {
+    addToKeyDownArray = (key) => {
         this.keysDownThisFrame.push(key);
     }
 
-    addKeyUpToArray = (key) => {
+    addToKeyUpArray = (key) => {
         this.keysUpThisFrame.push(key);
     }
 
@@ -41,7 +43,7 @@ class InputSingleton {
     // I'm starting to think that I should preserve scope by default, like with bind or probably actually arrow functions
     processUpEvent = (eventData) => {
         // this should be cleared at the end of each loop via the clearArrays function
-        this.addKeyUpToArray();
+        this.addToKeyUpArray();
 
         let index = this.heldKeys.findIndex(currentKey => currentKey === eventData.key)
         if (index !== -1) {
@@ -52,15 +54,17 @@ class InputSingleton {
         }
     }
 
-    // I DON'T UNDERSTAND SCOOOOOOOOPPPPE
+    // I DON'T UNDERSTAND SCOOOOOOOOPPPPE // I do now lol
+    // It's being called by window from it's addEventListener's EventTarget
     processDownEvent = (eventData) => {
-        // this should be cleared at the end of each loop via the clearArrays function
-        this.addKeyDownToArray(eventData.key);
 
         // we don't want the heldKeys array to fill with the same key since most browsers will keep sending the keydown event,
         // but with a weird delay and we want that delay to coinside with the game loop maybe there is a more elegant way to handle this?
         //TODO: check if there is a more elegant way to handle this
         if (!this.heldKeys.find(currentKey => currentKey === eventData.key)) {
+            // the addToKeyDownArray should be cleared at the end of each loop via the clearArrays function
+            // if the key just pressed is already held then don't add it to the keydown array
+            this.addToKeyDownArray(eventData.key);
             this.heldKeys.push(eventData.key);
         }
     }
@@ -81,6 +85,11 @@ class InputSingleton {
         return false;
     }
 
+    /**
+     * Returns true if the key was pressed down this frame.
+     * @param {*} key 
+     * @returns bool
+     */
     getKeyDown = (key) => {
         if (this.keysDownThisFrame.find(currentKey => currentKey === key)) {
             return true;
@@ -89,6 +98,11 @@ class InputSingleton {
             return false;
     }
 
+    /**
+     * Returns true if the key was let up this frame.
+     * @param {*} key 
+     * @returns bool
+     */
     getKeyUp = (key) => {
         if (this.keysUpThisFrame.find(currentKey => currentKey === key))
             return true;
