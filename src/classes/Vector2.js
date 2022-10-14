@@ -5,7 +5,15 @@ class Vector2 {
     }
 
     static add(firstVector2, secondVector2) {
-        return new Vector2(firstVector2.x + secondVector2.x, firstVector2.y, secondVector2.y);
+        return new Vector2(firstVector2.x + secondVector2.x, firstVector2.y + secondVector2.y);
+    }
+
+    static subtract(firstVector2, secondVector2) {
+        return new Vector2(firstVector2.x - secondVector2.x, firstVector2.y - secondVector2.y);
+    }
+
+    static sum(firstVector2, secondVector2) {
+        return new Vector2(firstVector2.x * secondVector2.x, firstVector2.y * secondVector2.y);
     }
 
     static abs(vector2) {
