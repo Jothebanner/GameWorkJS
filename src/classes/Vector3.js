@@ -9,6 +9,10 @@ class Vector3 {
         return new Vector3(firstVector3.x + secondVector3.x, firstVector3.y + secondVector3.y, firstVector3.z + secondVector3.z);
     }
 
+    static subtract(firstVector3, secondVector3) {
+        return new Vector3(firstVector3.x - secondVector3.x, firstVector3.y - secondVector3.y, firstVector3.z - secondVector3.z);
+    }
+
     static abs(vector3) {
         return new Vector3(Math.abs(vector3.x), Math.abs(vector3.y), Math.abs(vector3.z));
     }
