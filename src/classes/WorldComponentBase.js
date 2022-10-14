@@ -48,7 +48,7 @@ class WorldComponentBase extends GameComponentBase {
    updateScaleFromEvent = (eventData) => {
       // scale should be proportial to the parent scale
       // so if the scale is two and the parent changes it's scale to two then the object should have a scale of four
-      this.updateScale(Vector2.sum(eventData.detail, this.localScale));
+      this.updateScale(eventData.detail);
    }
 
    setPositionListener = () => {
