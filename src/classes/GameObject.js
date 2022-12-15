@@ -42,6 +42,13 @@ class GameObject extends WorldComponentBase {
 
     setParentObject = (gameObject) =>
     {
+        if (gameObject.onlyOne)
+        {
+            if (this.children.find(child => typeof(child) == typeof(gameObject)) != undefined)
+            {
+                throw "Can only have one of component-type: " + typeof(gameObject) + " per GameObject.";
+            }
+        }
         this.parentObject = gameObject;
         if (this.parentObject == null)
             this.startLoops();

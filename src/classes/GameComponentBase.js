@@ -8,6 +8,8 @@ class GameComponentBase {
         this.startFunctions = [];
         // enabled by default
         this.#enabled = true;
+        // can have several of most components. Tho components like the PhysicsComponent can only have one
+        this.onlyOne = false;
     }
 
     /**
