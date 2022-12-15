@@ -1,6 +1,6 @@
-import GameComponentBase from "./GameComponentBase";
-import Vector2 from "./Vector2";
-import Vector3 from "./Vector3";
+import GameComponentBase from "./GameComponentBase.js";
+import Vector2 from "./Vector2.js";
+import Vector3 from "./Vector3.js";
 
 // A component that can exist in the world. Like, a script doesn't need to exist in the world, but a collider would.
 class WorldComponentBase extends GameComponentBase {

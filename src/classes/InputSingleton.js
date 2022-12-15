@@ -14,8 +14,9 @@ class InputSingleton {
         this.heldKeys = [];
 
         // listen for up and down events
-        window.addEventListener("keydown", this.processDownEvent);
-        window.addEventListener("keyup", this.processUpEvent);
+        window.addEventListener("keydown", this.processDownEvent.bind(this));
+        //TODO: why is the .bind necessary? It should work with just the arrow functions, right?
+        window.addEventListener("keyup", this.processUpEvent.bind(this));
         // there's no way this is gonna compile // it did???
         InputSingleton.instance = this;
         // how does javascript work??

@@ -1,5 +1,5 @@
-import Vector3 from "./Vector3";
-import WorldComponentBase from "./WorldComponentBase";
+import Vector3 from "./Vector3.js";
+import WorldComponentBase from "./WorldComponentBase.js";
 
 class GameObject extends WorldComponentBase {
 
@@ -74,6 +74,7 @@ class GameObject extends WorldComponentBase {
     }
 
     frameUpdate = () => {
+        console.log("looooop");
         this.children.forEach(this.callChildFrameUpdateFuction);
 
         // if at the top of the tree then we want recursion

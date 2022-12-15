@@ -1,8 +1,8 @@
-import InputSingleton from "./InputSingleton";
-import Omnilist from "./Omnilist";
-import Vector3 from "./Vector3";
-import Vector2 from "./Vector2";
-import WorldComponentBase from "./WorldComponentBase";
+import InputSingleton from "./InputSingleton.js";
+import Omnilist from "./Omnilist.js";
+import Vector3 from "./Vector3.js";
+import Vector2 from "./Vector2.js";
+import WorldComponentBase from "./WorldComponentBase.js";
 
 // TODO: refactor gamecomponentbase and renderablecomponentbase
 class Camera extends WorldComponentBase {
@@ -33,16 +33,17 @@ class Camera extends WorldComponentBase {
     }
 
     frameUpdate() {
+        this.position.z += .001;
         //TODO: remove this eventually
         if (InputSingleton.getInstance().getKey("j")) {
             this.position.x -= 2;
         }
         // zooming is really fun :D
         if (InputSingleton.getInstance().getKey("u")) {
-            this.position.z -= 2;
+            this.position.z -= .02;
         }
         if (InputSingleton.getInstance().getKey("o")) {
-            this.position.z += 2;
+            this.position.z += .02;
         }
         this.drawItems();
     }
@@ -63,12 +64,12 @@ class Camera extends WorldComponentBase {
         if (item.isEnabled() === true && typeof (item.draw) == "function") {
             let distanceModifier;
             if (item.getPosition().z === 0) {
-                // if the item's z position is zero then render it as tho it's very close to zero
+                // if the item's z position is zero then render it as though it's very close to zero
                 distanceModifier = 1 / 0.000001;
             }
-            else {   //TODO: rework this so it's not bad
+            else {   //TODO: rework this so it's not bad // for future me: if an object is not in-front of the camera then don't display it. something feels icky about the code
                 if (this.getPosition().z - item.getPosition().z < 0)
-                    distanceModifier = 1 / Math.abs(this.getPosition().z - item.getPosition().z);
+                    distanceModifier = 1 / Math.abs(this.getPosition().z - item.getPosition().z); // TODO: focal length of one isn't very dynamic. mess with this later
                 else
                     distanceModifier = false;
             }
