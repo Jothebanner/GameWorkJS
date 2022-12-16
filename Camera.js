@@ -16,11 +16,8 @@ class Camera extends WorldComponentBase {
         this.resolution = { x: 0, y: 0 }
         // IDEA: perhaps an aspect ratio variable would work. You could change it realtime tho keeping things centered might be interesting
         this.aspectRatio = aspectRatio;
-        // this.aspectRatio.x = aspectRatio.x;
-        // this.aspectRatio.y = aspectRatio.y;
-        //idk why 120, but 1920/16 and 1080/9 both equal 120 so it's probably a safe bet. Might look icky on 2k or 4 monitors tho :/
-        this.resolution.x = this.aspectRatio.x * 120;
-        this.resolution.y = this.aspectRatio.y * 120;
+        this.aspectRatio.x = aspectRatio.x;
+        this.aspectRatio.y = aspectRatio.y;
         // default resolution modifier TODO: make more?
         this.resolutionMod = { x: 0, y: 0 };
         this.resolutionMod.x = this.context.canvas.width / this.resolution.x;
@@ -38,9 +35,10 @@ class Camera extends WorldComponentBase {
     updateScreenMod = () => {
         //idk why 120, but 1920/16 and 1080/9 both equal 120 so it's probably a safe bet. Might look icky on 2k or 4 monitors tho :/
         this.resolution.x = this.aspectRatio.x * 120;
-        this.resolution.y = this.aspectRatio.y * 120;// resize all of the items drawn to match the screen
-        this.resolutionMod.x = this.context.canvas.width / this.resolution.x;
-        this.resolutionMod.y = this.context.canvas.height / this.resolution.y;
+        this.resolution.y = this.aspectRatio.y * 120;
+        // resize all of the items drawn to match the screen
+        this.resolutionMod.x = this.context.canvas.width / (this.aspectRatio.x * 120);
+        this.resolutionMod.y = this.context.canvas.height / (this.aspectRatio.y * 120);
         // recenter the camera in the middle of the screen
         this.xScreenPosition = this.context.canvas.width / 2;
         this.yScreenPosition = this.context.canvas.height / 2;
@@ -75,7 +73,7 @@ class Camera extends WorldComponentBase {
                 else
                     distanceModifier = false;
             }
-
+            
             item.draw(this.context, distanceModifier, this.resolutionMod, new Vector2(this.xScreenPosition, this.yScreenPosition), new Vector2(this.getPosition().x, this.getPosition().y));
         }
     }
