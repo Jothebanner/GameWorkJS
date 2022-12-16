@@ -1,0 +1,19 @@
+{
+  "name": "gameworkjs",
+  "version": "1.0.0",
+  "description": "Javascript framework? Game engine? GameWork.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jothebanner/GameWorkJS.git"
+  },
+  "author": "Jacob Hawks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jothebanner/GameWorkJS/issues"
+  },
+  "homepage": "https://github.com/Jothebanner/GameWorkJS#readme"
+}
