@@ -9,7 +9,7 @@ class SquareRenderer extends RenderableComponentBase {
         this.ySize = ySize;
         this.xPosScaleModifier = 1;
         this.yPosScaleModifier = 1;
-        this.preserveObjectSize = preserveObjectSize;
+        this.preserveObjectSize = true;
     }
 
     frameUpdate() {
@@ -71,13 +71,14 @@ class SquareRenderer extends RenderableComponentBase {
             let xSize;
             let ySize;
 
-            if (preserveObjectSize) {
+            if (this.preserveObjectSize) {
 
                 xSize = this.xSize * this.getScale().x * cameraDistanceMod;
                 // negative cameradistancemod since canvas counts up towards bottom right so we need to flip horizontal
                 ySize = this.ySize * this.getScale().y * -cameraDistanceMod;
             }
-            else {
+            else
+            {
                 xSize = this.xSize * this.getScale().x * cameraDistanceMod * resolutionMod.x;
                 // negative cameradistancemod since canvas counts up towards bottom right so we need to flip horizontal
                 ySize = this.ySize * this.getScale().y * -cameraDistanceMod * resolutionMod.y;
