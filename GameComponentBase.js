@@ -53,6 +53,12 @@ class GameComponentBase {
         // Old me was wrong. If the gameObject is set as the parent then these functions will have access to it.
         this.startFunctions.forEach((func) => {func()});
         // I love javascript so much; like look at this, you can tell anything to quack and it tries to quack!
+        
+        // newer old me might have been dumb lol
+        if (typeof (this.start) == "function")
+        {
+            this.start();
+        }
     }
 }
 

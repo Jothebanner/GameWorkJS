@@ -66,6 +66,7 @@ class GameObject extends WorldComponentBase {
         }
     }
 
+    // TODO: I don't think this ever runs :/
     start() {
         this.children.forEach(this.callChildStartFuction);
     }
@@ -81,7 +82,6 @@ class GameObject extends WorldComponentBase {
     }
 
     frameUpdate = () => {
-        console.log("looooop");
         this.children.forEach(this.callChildFrameUpdateFuction);
 
         // if at the top of the tree then we want recursion

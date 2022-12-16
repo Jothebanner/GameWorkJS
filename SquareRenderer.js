@@ -64,12 +64,12 @@ class SquareRenderer extends RenderableComponentBase {
         // let ySizeOnScreen = ySizeToCamera * resolutionMod;
 
         // adding unnecessary parenthesis for readabiltiy
-        let xPos = cameraScreenPos.x + (((this.getPosition().x - cameraWorldPos.x) * cameraDistanceMod) * resolutionMod)
-        let yPos = cameraScreenPos.y + (((this.getPosition().y - cameraWorldPos.y) * -cameraDistanceMod) * resolutionMod)
+        let xPos = cameraScreenPos.x + (((this.getPosition().x - cameraWorldPos.x) * cameraDistanceMod) * resolutionMod.x)
+        let yPos = cameraScreenPos.y + (((this.getPosition().y - cameraWorldPos.y) * -cameraDistanceMod) * resolutionMod.y)
 
-        let xSize = this.xSize * this.getScale().x * cameraDistanceMod * resolutionMod;
+        let xSize = this.xSize * this.getScale().x * cameraDistanceMod * resolutionMod.x;
         // negative cameradistancemod since canvas counts up towards bottom right so we need to flip horizontal
-        let ySize = this.ySize * this.getScale().y * -cameraDistanceMod * resolutionMod;
+        let ySize = this.ySize * this.getScale().y * -cameraDistanceMod * resolutionMod.y;
 
             // third try
             context.fillRect(
