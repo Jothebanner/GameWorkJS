@@ -37,7 +37,8 @@ class Camera extends WorldComponentBase {
 
     updateScreenMod = () => {
         //idk why 120, but 1920/16 and 1080/9 both equal 120 so it's probably a safe bet. Might look icky on 2k or 4 monitors tho :/
-        // resize all of the items drawn to match the screen
+        this.resolution.x = this.aspectRatio.x * 120;
+        this.resolution.y = this.aspectRatio.y * 120;// resize all of the items drawn to match the screen
         this.resolutionMod.x = this.context.canvas.width / this.resolution.x;
         this.resolutionMod.y = this.context.canvas.height / this.resolution.y;
         // recenter the camera in the middle of the screen
@@ -74,7 +75,7 @@ class Camera extends WorldComponentBase {
                 else
                     distanceModifier = false;
             }
-            
+
             item.draw(this.context, distanceModifier, this.resolutionMod, new Vector2(this.xScreenPosition, this.yScreenPosition), new Vector2(this.getPosition().x, this.getPosition().y));
         }
     }
