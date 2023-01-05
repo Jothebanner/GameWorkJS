@@ -1,3 +1,5 @@
+'use strict';
+
 import RenderableComponentBase from "./RenderableComponentBase.js";
 import Vector3 from "./Vector3.js";
 
@@ -10,6 +12,7 @@ class SquareRenderer extends RenderableComponentBase {
         this.xPosScaleModifier = 1;
         this.yPosScaleModifier = 1;
         this.preserveObjectSize = true;
+        this.errorCount = 0;
     }
 
     frameUpdate() {
