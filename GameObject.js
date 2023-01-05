@@ -1,4 +1,5 @@
-import Vector3 from "./Vector3.js";
+'use strict';
+
 import WorldComponentBase from "./WorldComponentBase.js";
 
 class GameObject extends WorldComponentBase {
@@ -66,7 +67,7 @@ class GameObject extends WorldComponentBase {
         }
     }
 
-    // TODO: I don't think this ever runs :/
+    // override the GameComponentBase start function
     start() {
         this.children.forEach(this.callChildStartFuction);
     }

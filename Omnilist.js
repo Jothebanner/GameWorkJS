@@ -1,11 +1,14 @@
+'use strict';
+
 // All hail the OMNILIST
 class Omnilist {
+    static #instance = null;
     constructor() {
-        if (Omnilist.instance)
-            return console.log("You're not supposed to make new singletons ya goof.");
+        if (Omnilist.#instance)
+            throw new Error("You're not supposed to make new singletons ya goof.");
 
         this.listOfAllThings = [];
-        Omnilist.instance = this;
+        Omnilist.#instance = this;
     }
 
     add = (item) =>
@@ -27,10 +30,10 @@ class Omnilist {
     }
 
     static getInstance() {
-        if (!Omnilist.instance) {
-            Omnilist.instance = new Omnilist();
+        if (!Omnilist.#instance) {
+            Omnilist.#instance = new Omnilist();
         }
-        return Omnilist.instance;
+        return Omnilist.#instance;
     }
 }
 

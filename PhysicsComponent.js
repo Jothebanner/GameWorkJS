@@ -1,3 +1,5 @@
+'use strict';
+
 // We will want to have real big-boi physics, kinda
 // We need be able to work with velocity, magnitude and colliders. Velocity will help us predict which colliders will collide in the next frame
 

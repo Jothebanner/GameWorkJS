@@ -1,7 +1,6 @@
 'use strict';
 
 import RenderableComponentBase from "./RenderableComponentBase.js";
-import Vector3 from "./Vector3.js";
 
 class SquareRenderer extends RenderableComponentBase {
     constructor(color, position, xSize = 1, ySize = 1, preserveObjectSize = true) {

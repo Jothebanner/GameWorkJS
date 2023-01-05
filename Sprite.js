@@ -1,3 +1,5 @@
+'use strict';
+
 //import DrawableObject from "./DrawableObject";
 
 class Sprite {

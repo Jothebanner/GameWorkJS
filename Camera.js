@@ -1,6 +1,5 @@
 'use strict';
 
-import InputSingleton from "./InputSingleton.js";
 import Omnilist from "./Omnilist.js";
 import Vector3 from "./Vector3.js";
 import Vector2 from "./Vector2.js";

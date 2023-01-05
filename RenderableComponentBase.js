@@ -1,3 +1,5 @@
+'use strict';
+
 import Omnilist from "./Omnilist.js";
 import Vector3 from "./Vector3.js";
 import WorldComponentBase from "./WorldComponentBase.js";
