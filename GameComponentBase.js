@@ -14,10 +14,7 @@ class GameComponentBase {
         this.onlyOne = false;
     }
 
-    start()
-    {
-        
-    }
+    start(){}
 
     /**
      * Returns the enabled property as a boolean.
