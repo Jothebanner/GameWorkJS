@@ -1,18 +1,27 @@
 {
   "name": "gameworkjs",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Javascript framework? Game engine? GameWork.",
-  "main": "./index.js",
+  "module": "index.mjs",
+  "main": "index.js",
+  "types": "./dist/index.d.ts",
+
+  "type": "module",
+
+  "files": [
+    "dist",
+    "index.*",
+    "./*"
+  ],
 
   "exports": {
-    ".": "./index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./index.mjs",
+      "export": "./index.js"
+    }
   },
-  
-  "type": "commonjs",
 
-  "scripts": {
-    "start": "node app.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jothebanner/GameWorkJS.git"
@@ -22,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/Jothebanner/GameWorkJS/issues"
   },
-  "homepage": "https://github.com/Jothebanner/GameWorkJS#readme"
+  "homepage": "https://github.com/Jothebanner/GameWorkJS#readme",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
 }
