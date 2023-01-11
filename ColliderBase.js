@@ -1,7 +1,10 @@
+'use script';
+
 import WorldComponentBase from "./WorldComponentBase.js";
 
 class ColliderBase extends WorldComponentBase {
     constructor() {
+        super();
         //TODO: add contact points
 
         // some sort of collision event

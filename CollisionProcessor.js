@@ -1,3 +1,5 @@
+'use strict';
+
 // singleton to manager colliders
 // we need something to hold lists of the layer and colliders that reside in them
 // global variables would work, though I think a singleton could be better because of lazy loading, ease of use (especially for beginners), and would follow the module schema I've been using for this project

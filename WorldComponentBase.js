@@ -1,3 +1,5 @@
+'use strict';
+
 import GameComponentBase from "./GameComponentBase.js";
 import Vector2 from "./Vector2.js";
 import Vector3 from "./Vector3.js";

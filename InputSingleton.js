@@ -1,14 +1,20 @@
+'use strict';
+
 // I should not be using a singleton for this, because the input boi should be a component added to a GameObject.
 // Not every GameObject will need access to input and if multiplayer is ever a thing then it'll be much easier to have mutiple controllers
 
 /**
  * Don't use new for this lad. Use InputSingleton.getInstance(). Because it's a singleton
  */
-class InputSingleton {
-    constructor() {
-        if (InputSingleton.instance)
-            return console.log("You're not supposed to make new singletons ya goof. To use the InputSingleton class use InputSingleton.getInstance; it handles all that nonsense.");
 
+class InputSingleton {
+    static #instance = null;
+
+    constructor() {
+        if (InputSingleton.#instance)
+            throw new Error("You're not supposed to make new singletons ya goof. To use the InputSingleton class use InputSingleton.getInstance; it handles all that nonsense.");
+
+        InputSingleton.#instance = this;
         this.keysDownThisFrame = [];
         this.keysUpThisFrame = [];
         this.heldKeys = [];
@@ -17,8 +23,8 @@ class InputSingleton {
         window.addEventListener("keydown", this.processDownEvent.bind(this));
         //TODO: why is the .bind necessary? It should work with just the arrow functions, right?
         window.addEventListener("keyup", this.processUpEvent.bind(this));
-        // there's no way this is gonna compile // it did???
-        InputSingleton.instance = this;
+        // there's no way this is gonna compile // it did??? // not with es6 // this is some esoteric biz // perhaps I should learn not to do this
+        //InputSingleton.instance = this;
         // how does javascript work??
     }
 
@@ -112,10 +118,10 @@ class InputSingleton {
     }
 
     static getInstance() {
-        if (!InputSingleton.instance) {
-            InputSingleton.instance = new InputSingleton();
+        if (!InputSingleton.#instance) {
+            InputSingleton.#instance = new InputSingleton();
         }
-        return InputSingleton.instance;
+        return InputSingleton.#instance;
     }
 }
 

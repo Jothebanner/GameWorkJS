@@ -1,3 +1,5 @@
+'use script';
+
 class Input {
 
     // I want this to by like Unity's static Input class, but seeing that they cheat and it's not REALLY static we're gonna have to have an instance of it :(
