@@ -5,11 +5,11 @@ declare class Camera extends WorldComponentBase {
         y: number;
     }, focal?: number);
     context: any;
-    resolution: {
+    aspectRatio: {
         x: number;
         y: number;
     };
-    aspectRatio: {
+    resolution: {
         x: number;
         y: number;
     };
@@ -20,6 +20,7 @@ declare class Camera extends WorldComponentBase {
     xScreenPosition: number;
     yScreenPosition: number;
     focal: number;
+    clearOnDraw: boolean;
     updateScreenMod: () => void;
     frameUpdate(): void;
     drawItems(): void;

@@ -3,7 +3,7 @@ export default InputSingleton;
  * Don't use new for this lad. Use InputSingleton.getInstance(). Because it's a singleton
  */
 declare class InputSingleton {
-    private static "__#3@#instance": any;
+    static "__#3@#instance": any;
     static getInstance(): any;
     keysDownThisFrame: any[];
     keysUpThisFrame: any[];

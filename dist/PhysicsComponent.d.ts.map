@@ -1,1 +1,1 @@
-{"version":3,"file":"PhysicsComponent.d.ts","sourceRoot":"","sources":["../PhysicsComponent.js"],"names":[],"mappings":";AASA;IAQQ,kBAA6B;IAyCjC;;;OAGG;IACH,wBAFW,OAAO,UAIjB;IAED;;;OAGG;IACH,kBAFW,OAAO,UAIjB;IAED,0BAIC;CACJ"}
+{"version":3,"file":"PhysicsComponent.d.ts","sourceRoot":"","sources":["../PhysicsComponent.js"],"names":[],"mappings":";AASA;IAQQ,kBAA6B;IAyCjC;;;OAGG;IACH,wBAFW,OAAO,UAIjB;IAED;;;OAGG;IACH,kBAFW,OAAO,UAIjB;IAED,0BAIC;CACJ;8BA1E6B,wBAAwB;oBAClC,cAAc"}

@@ -1,10 +1,15 @@
 'use strict';
 
+import Vector3 from "./Vector3.js";
 import WorldComponentBase from "./WorldComponentBase.js";
+
+/**
+ * The workhorse
+ */
 
 class GameObject extends WorldComponentBase {
 
-    constructor(position) {
+    constructor(position = new Vector3()) {
         super(position);
 
         // store all of the components that are children of this object
@@ -13,12 +18,11 @@ class GameObject extends WorldComponentBase {
         // these functions get the gameObject sent to them
         //this.startFunctions.push(this.setGameContext);
         //this.startFunctions.push(this.setListeners);
-        
+
         this.startLoops();
     }
 
-    startLoops()
-    {
+    startLoops() {
         this.frameUpdate();
 
         // only want these bois to run once
@@ -41,13 +45,10 @@ class GameObject extends WorldComponentBase {
     //         this.context = contextSource;
     // }
 
-    setParentObject = (gameObject) =>
-    {
-        if (gameObject.onlyOne)
-        {
-            if (this.children.find(child => typeof(child) == typeof(gameObject)) != undefined)
-            {
-                throw "Can only have one of component-type: " + typeof(gameObject) + " per GameObject.";
+    setParentObject = (gameObject) => {
+        if (gameObject.onlyOne) {
+            if (this.children.find(child => typeof (child) == typeof (gameObject)) != undefined) {
+                throw "Can only have one of component-type: " + typeof (gameObject) + " per GameObject.";
             }
         }
         this.parentObject = gameObject;
@@ -83,16 +84,20 @@ class GameObject extends WorldComponentBase {
     }
 
     frameUpdate = () => {
-        this.children.forEach(this.callChildFrameUpdateFuction);
+        if (this.isEnabled) {
+            this.children.forEach(this.callChildFrameUpdateFuction);
 
-        // if at the top of the tree then we want recursion
-        if (this.parentObject == null) {
-            // call lateUpdate after the frameUpdate so that it's late lol
-            // I straight-up stole this from unity
-            this.lateUpdate();
+            // if at the top of the tree then we want recursion
+            if (this.parentObject == null) {
+                // call lateUpdate after the frameUpdate so that it's late lol
+                // I straight-up stole this from unity
+                this.lateUpdate();
 
-            // This is the strangest thing. The arrow function did not preserve "this", but bind did.
-            //TODO: why??
+                // This is the strangest thing. The arrow function did not preserve "this", but bind did.
+                //TODO: why??
+                requestAnimationFrame(this.frameUpdate.bind(this));
+            }
+        } else {
             requestAnimationFrame(this.frameUpdate.bind(this));
         }
     }

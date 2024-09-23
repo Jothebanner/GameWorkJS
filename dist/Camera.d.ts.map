@@ -1,1 +1,1 @@
-{"version":3,"file":"Camera.d.ts","sourceRoot":"","sources":["../Camera.js"],"names":[],"mappings":";AAQA;IACI;;;uBAwBC;IAnBG,aAAsB;IAEtB;;;MAAgC;IAEhC;;;MAA8B;IAI9B;;;MAAmC;IAInC,wBAA+C;IAC/C,wBAAgD;IAEhD,cAAkB;IAMtB,4BAUC;IAED,oBAEC;IAQD,kBAGC;IAED,8BAiBC;CAGJ"}
+{"version":3,"file":"Camera.d.ts","sourceRoot":"","sources":["../Camera.js"],"names":[],"mappings":";AAQA;IACI;;;uBAgCC;IA1BG,aAAsB;IAGtB;;;MAA8B;IAK9B;;;MAA8E;IAG9E;;;MAAmC;IAKnC,wBAA+C;IAC/C,wBAAgD;IAEhD,cAAkB;IAGlB,qBAAuB;IAM3B,4BAUC;IAED,oBAEC;IAQD,kBAIC;IAED,8BAiBC;CAGJ;+BAtF8B,yBAAyB;oBAFpC,cAAc"}

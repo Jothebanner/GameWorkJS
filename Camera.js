@@ -11,23 +11,31 @@ class Camera extends WorldComponentBase {
     {
         // forward the position on to the base
         super(position);
+
         // The holder of the context. Anything to be displayed goes through him
         this.context = context;
-        //TODO: remove this and set during initialization
-        this.resolution = { x: 0, y: 0 }
+
         // IDEA: perhaps an aspect ratio variable would work. You could change it realtime tho keeping things centered might be interesting
         this.aspectRatio = aspectRatio;
         this.aspectRatio.x = aspectRatio.x;
         this.aspectRatio.y = aspectRatio.y;
+
+        //TODO: remove this and set during initialization
+        this.resolution = { x: this.aspectRatio.x * 120, y: this.aspectRatio.y * 120 }
+
         // default resolution modifier TODO: make more?
         this.resolutionMod = { x: 0, y: 0 };
         this.resolutionMod.x = this.context.canvas.width / this.resolution.x;
         this.resolutionMod.y = this.context.canvas.height / this.resolution.y;
+
         // center the camera in the screen by default
         this.xScreenPosition = context.canvas.width / 2;
         this.yScreenPosition = context.canvas.height / 2;
 
         this.focal = focal;
+
+        // option to turn off clearing the canvas 
+        this.clearOnDraw = true;
 
         // recenter when the screen changes
         window.addEventListener("resize", this.updateScreenMod);
@@ -56,7 +64,8 @@ class Camera extends WorldComponentBase {
     //TODO: sort by z and render the closest things last
     //TODO: don't display things not in-frame
     drawItems() {
-        this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+        if (this.clearOnDraw)
+            this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
         Omnilist.getInstance().getList().forEach((item) => this.drawItem(item));
     }
 

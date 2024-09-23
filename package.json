@@ -1,6 +1,6 @@
 {
   "name": "gameworkjs",
-  "version": "1.0.6",
+  "version": "1.0.72",
   "description": "Javascript framework? Game engine? GameWork.",
   "module": "index.mjs",
   "main": "index.js",

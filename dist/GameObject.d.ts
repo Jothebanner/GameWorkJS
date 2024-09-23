@@ -3,7 +3,7 @@ export default GameObject;
  * The workhorse
  */
 declare class GameObject extends WorldComponentBase {
-    constructor(position: any);
+    constructor(position?: Vector3);
     children: any[];
     startLoops(): void;
     physicsLoopInterval: number;
@@ -17,4 +17,5 @@ declare class GameObject extends WorldComponentBase {
     callComponentLateUpdateFuction(component: any): void;
 }
 import WorldComponentBase from "./WorldComponentBase.js";
+import Vector3 from "./Vector3.js";
 //# sourceMappingURL=GameObject.d.ts.map
